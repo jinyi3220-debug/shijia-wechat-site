@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>成都视佳领先科技有限公司</title>
+<style>
+/* ===== CSS Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; color: #333; background: #f5f7fa; line-height: 1.6; min-width: 320px; }
+
+/* ===== Color Variables ===== */
+:root {
+  --primary: #1a5fb4;
+  --primary-dark: #144a8c;
+  --primary-light: #e8f0fa;
+  --text: #333;
+  --text-light: #666;
+  --text-lighter: #999;
+  --bg: #f5f7fa;
+  --white: #fff;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-hover: 0 4px 20px rgba(26,95,180,0.15);
+}
+
+/* ===== Header / Nav ===== */
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(26,95,180,0.1); transition: box-shadow 0.3s; }
+.header.scrolled { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.header-inner { max-width: 1200px; margin: 0 auto; padding: 0 16px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+.header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.header-logo img { height: 36px; width: auto; }
+.header-logo span { font-size: 17px; font-weight: 600; color: var(--primary); white-space: nowrap; }
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--text); font-size: 14px; position: relative; padding: 4px 0; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--primary); }
+.nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--primary); transition: width 0.3s; border-radius: 1px; }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* ===== Hero / Banner ===== */
+.hero { position: relative; margin-top: 56px; background: linear-gradient(135deg, #0d3b7a 0%, #1a5fb4 40%, #2a7de1 100%); overflow: hidden; min-height: 380px; display: flex; align-items: center; justify-content: center; }
+.hero-bg { position: absolute; inset: 0; background: url('images/banner.png') center/cover no-repeat; opacity: 0.25; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(13,59,122,0.7) 0%, rgba(26,95,180,0.6) 100%); }
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 40px 20px; max-width: 600px; }
+.hero-logo { width: 80px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); }
+.hero-title { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: 2px; margin-bottom: 8px; }
+.hero-slogan { font-size: 15px; color: rgba(255,255,255,0.85); font-weight: 300; letter-spacing: 4px; margin-bottom: 16px; }
+.hero-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.8; max-width: 480px; margin: 0 auto; }
+
+/* ===== Section Common ===== */
+.section { padding: 48px 16px; max-width: 1200px; margin: 0 auto; }
+.section-header { text-align: center; margin-bottom: 36px; }
+.section-title { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.section-subtitle { font-size: 14px; color: var(--text-lighter); }
+.section-line { width: 40px; height: 3px; background: var(--primary); margin: 12px auto 0; border-radius: 2px; }
+
+/* ===== Services ===== */
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.service-card { background: var(--white); border-radius: 12px; padding: 32px 24px; box-shadow: var(--shadow); transition: transform 0.3s, box-shadow 0.3s; cursor: default; }
+.service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.service-icon { font-size: 42px; margin-bottom: 16px; display: block; }
+.service-name { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.service-sub { font-size: 13px; color: var(--text-lighter); margin-bottom: 12px; }
+.service-desc { font-size: 14px; color: var(--text-light); line-height: 1.7; margin-bottom: 14px; }
+.service-features { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.service-features li { font-size: 12px; color: var(--primary); background: var(--primary-light); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+
+/* ===== Cases ===== */
+.case-card { background: var(--white); border-radius: 12px; padding: 28px 24px; box-shadow: var(--shadow); display: flex; align-items: flex-start; gap: 20px; max-width: 720px; margin: 0 auto; }
+.case-badge { flex-shrink: 0; width: 56px; height: 56px; background: var(--primary-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.case-info { flex: 1; }
+.case-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.case-title { font-size: 18px; font-weight: 600; color: var(--text); }
+.case-tag { font-size: 12px; background: var(--primary); color: #fff; padding: 2px 10px; border-radius: 12px; }
+.case-desc { font-size: 14px; color: var(--text-light); line-height: 1.7; }
+
+/* ===== About ===== */
+.about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.about-intro-card, .about-contact-card { background: var(--white); border-radius: 12px; padding: 28px 24px; box-shadow: var(--shadow); }
+.about-intro-card h3, .about-contact-card h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.about-intro-card p { font-size: 14px; color: var(--text-light); line-height: 1.8; }
+.highlights { display: flex; gap: 20px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #eee; }
+.highlight-item { text-align: center; flex: 1; }
+.highlight-num { display: block; font-size: 28px; font-weight: 700; color: var(--primary); }
+.highlight-label { font-size: 12px; color: var(--text-lighter); margin-top: 2px; }
+
+.contact-list { list-style: none; }
+.contact-list li { padding: 12px 0; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 12px; }
+.contact-list li:last-child { border-bottom: none; }
+.contact-icon { font-size: 20px; flex-shrink: 0; }
+.contact-label { font-size: 13px; color: var(--text-lighter); min-width: 32px; }
+.contact-value { font-size: 14px; color: var(--text); }
+.contact-value a { color: var(--primary); text-decoration: none; }
+
+/* ===== Footer ===== */
+.footer { background: #1a1f2b; color: rgba(255,255,255,0.6); text-align: center; padding: 24px 16px; font-size: 13px; line-height: 1.8; }
+.footer-name { color: rgba(255,255,255,0.9); font-weight: 500; font-size: 15px; }
+.footer-phone { color: rgba(255,255,255,0.7); }
+.footer-phone a { color: rgba(255,255,255,0.8); text-decoration: none; }
+.footer-addr { margin-top: 4px; }
+.footer-divider { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 12px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero { min-height: 300px; }
+  .hero-title { font-size: 22px; }
+  .hero-slogan { font-size: 13px; letter-spacing: 2px; }
+  .hero-logo { width: 64px; }
+  .services-grid { grid-template-columns: 1fr; gap: 16px; }
+  .about-content { grid-template-columns: 1fr; }
+  .section { padding: 36px 16px; }
+  .section-title { font-size: 20px; }
+  .case-card { flex-direction: column; align-items: center; text-align: center; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#" class="header-logo">
+      <img src="images/logo.png" alt="视佳科技" onerror="this.style.display='none'">
+      <span>视佳领先科技</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home" class="active">首页</a></li>
+        <li><a href="#services">产品服务</a></li>
+        <li><a href="#cases">案例动态</a></li>
+        <li><a href="#about">关于我们</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Banner -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <img src="images/logo.png" alt="视佳科技" class="hero-logo" onerror="this.style.display='none'">
+    <h1 class="hero-title">成都视佳领先科技有限公司</h1>
+    <p class="hero-slogan">连接教育需求 · 赋能科技创新</p>
+    <p class="hero-desc">心理 + 特教 + 芯片 · 三位一体教育科技服务商<br>AI博士团队领衔 · 9年深耕 · 丰富项目交付经验</p>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section" id="services">
+  <div class="section-header">
+    <h2 class="section-title">产品服务</h2>
+    <p class="section-subtitle">三大业务板块，全方位教育科技解决方案</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="services-grid">
+    <!-- 心理咨询 -->
+    <div class="service-card">
+      <span class="service-icon">🧠</span>
+      <h3 class="service-name">心理咨询</h3>
+      <p class="service-sub">设备及服务</p>
+      <p class="service-desc">专业心理咨询解决方案，涵盖心理测评、个体咨询、团体辅导、危机干预等服务。配备先进的心理健康设备，支持学校、企业、社区等多场景应用。</p>
+      <ul class="service-features">
+        <li>心理测评系统</li>
+        <li>个体心理咨询</li>
+        <li>团体心理辅导</li>
+        <li>危机干预服务</li>
+        <li>心理健康讲座</li>
+        <li>脑电生物反馈训练</li>
+      </ul>
+    </div>
+    <!-- 特殊教育 -->
+    <div class="service-card">
+      <span class="service-icon">🎓</span>
+      <h3 class="service-name">特殊教育</h3>
+      <p class="service-sub">设备及服务</p>
+      <p class="service-desc">面向特殊需求学生的教育解决方案，提供个性化评估、康复训练、辅助教学设备及师资培训。助力特殊教育学校和教育机构实现因材施教。</p>
+      <ul class="service-features">
+        <li>个性化评估系统</li>
+        <li>康复训练方案</li>
+        <li>辅助教学设备</li>
+        <li>师资培训服务</li>
+        <li>融合教育支持</li>
+        <li>家校协同平台</li>
+      </ul>
+    </div>
+    <!-- 集成芯片 -->
+    <div class="service-card">
+      <span class="service-icon">🔬</span>
+      <h3 class="service-name">集成芯片</h3>
+      <p class="service-sub">设备及服务</p>
+      <p class="service-desc">国产芯片代理与集成服务，为教育科技场景提供高性能、高可靠性的芯片解决方案。加速国产芯片技术的生态布局与行业落地应用。</p>
+      <ul class="service-features">
+        <li>芯片代理销售</li>
+        <li>方案集成设计</li>
+        <li>技术支持服务</li>
+        <li>批量供货保障</li>
+        <li>应用场景适配</li>
+        <li>生态合作共建</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Cases -->
+<section class="section" id="cases">
+  <div class="section-header">
+    <h2 class="section-title">案例动态</h2>
+    <p class="section-subtitle">携手合作伙伴，共建教育科技生态</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="case-card">
+    <div class="case-badge">🧠</div>
+    <div class="case-info">
+      <div class="case-header">
+        <span class="case-title">四川省蓬溪中学校</span>
+        <span class="case-tag">心理健康</span>
+      </div>
+      <p class="case-desc">为蓬溪中学搭建心理健康服务体系，开展高三心理探索与指导、情绪急救箱培训、考前减压实用技巧等系列专题讲座，助力学生心理健康成长。</p>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="section-header">
+    <h2 class="section-title">关于我们</h2>
+    <p class="section-subtitle">9年深耕，值得信赖</p>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-content">
+    <div class="about-intro-card">
+      <h3>📋 公司概况</h3>
+      <p>成都视佳领先科技有限公司专注于心理和芯片代理领域 9 年，拥有以人工智能博士领衔的研发队伍，具有丰富的项目施工与交付能力，提供快捷稳定的售前、售中、售后服务。携手新华文轩、科大讯飞、重庆理工大学等合作伙伴，致力于成为领先的教育科技综合服务商。</p>
+      <div class="highlights">
+        <div class="highlight-item">
+          <span class="highlight-num">9</span>
+          <span class="highlight-label">年深耕</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-num">3</span>
+          <span class="highlight-label">大业务</span>
+        </div>
+        <div class="highlight-item">
+          <span class="highlight-num">10+</span>
+          <span class="highlight-label">合作学校</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-contact-card">
+      <h3>📞 联系我们</h3>
+      <ul class="contact-list">
+        <li>
+          <span class="contact-icon">📞</span>
+          <span class="contact-label">电话</span>
+          <span class="contact-value"><a href="tel:13808202454">13808202454</a></span>
+        </li>
+        <li>
+          <span class="contact-icon">✉️</span>
+          <span class="contact-label">邮箱</span>
+          <span class="contact-value">jinji@zlxxl.cn</span>
+        </li>
+        <li>
+          <span class="contact-icon">📍</span>
+          <span class="contact-label">地址</span>
+          <span class="contact-value">成都市高新区科园二路创业中心301室</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p class="footer-name">成都视佳领先科技有限公司</p>
+  <p class="footer-phone">咨询热线：<a href="tel:13808202454">13808202454</a></p>
+  <p class="footer-addr">四川 · 成都市高新区科园二路创业中心301室</p>
+  <div class="footer-divider">&copy; 2026 成都视佳领先科技有限公司 · All Rights Reserved</div>
+</footer>
+
+<script>
+// Scroll header shadow
+window.addEventListener('scroll', function() {
+  var header = document.getElementById('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+
+  // Active nav link
+  var sections = ['home', 'services', 'cases', 'about'];
+  var links = document.querySelectorAll('.nav-links a');
+  var current = '';
+  sections.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 100) {
+      current = id;
+    }
+  });
+  links.forEach(function(link) {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
